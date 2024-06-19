@@ -15,7 +15,7 @@ public class Solution {
         for (int i = 0; i < nums.Length; i++) {
             if (nums[i] == target) {
                 count++;
-                // Reservoir sampling: replace result with the current index with probability 1/count
+                // Reservoir sampling
                 if (rand.Next(count) == 0) {
                     result = i;
                 }
