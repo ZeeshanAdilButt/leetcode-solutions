@@ -25,7 +25,7 @@ public class Solution {
     public bool JudgeSquareSum(int c) {
         
         int left = 0;
-        int right =  (int)Math.Sqrt(c);
+        long right =  (int)Math.Sqrt(c);
         
         while (left<=right){
             
