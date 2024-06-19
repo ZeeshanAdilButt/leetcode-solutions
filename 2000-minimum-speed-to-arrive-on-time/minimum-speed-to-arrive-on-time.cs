@@ -23,6 +23,7 @@ public class Solution {
         for(int i=0; i<dist.Length; i++) {
             double t = (double)dist[i] / speed;
             //because the time taken by last train need not be converted into Integer.
+            //but ofc for last train we don't need to wait
             time += (i == dist.Length-1 ? t : Math.Ceiling(t));
         }
 
