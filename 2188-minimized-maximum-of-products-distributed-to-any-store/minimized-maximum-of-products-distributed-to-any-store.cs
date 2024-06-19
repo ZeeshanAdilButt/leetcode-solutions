@@ -21,6 +21,7 @@ public class Solution {
     private bool CanDistribute(int n, int[] quantities, int maxProducts) {
         int requiredStores = 0;
         foreach (int quantity in quantities) {
+            //The expression quantity + maxProducts - 1 is a common trick used to round up when dividing integers in programming. This trick ensures that any remainder from the division is properly accounted for by adding one more to the integer division result when there is a remainder.
             requiredStores += (quantity + maxProducts - 1) / maxProducts;
             if (requiredStores > n) {
                 return false;
