@@ -25,11 +25,11 @@ public class Solution {
     public bool JudgeSquareSum(int c) {
         
         int left = 0;
-        long right =  (long)Math.Sqrt(c);
+        int right =  (int)Math.Sqrt(c);
         
         while (left<=right){
             
-           long current = left*left + right*right;
+           long current = left*left + (long)right*right;
             
             if (current > c){
                 right--;
