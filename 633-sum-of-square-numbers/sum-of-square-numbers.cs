@@ -29,7 +29,7 @@ public class Solution {
         
         while (left<=right){
             
-           long current = left*left + (long)right*right;
+           long current = left*left + right*right;
             
             if (current > c){
                 right--;
