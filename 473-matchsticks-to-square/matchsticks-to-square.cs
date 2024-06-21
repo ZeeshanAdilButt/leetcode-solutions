@@ -1,45 +1,32 @@
 
 
 public class Solution {
-    
-    
     public bool Makesquare(int[] nums) {
-        if (nums.Length < 4) return false;
         
-        int sum = nums.Sum();
+        if (nums == null || nums.Length < 4) return false;
         
-        
+        int sum = 0;
+        foreach (int num in nums) sum += num;
         if (sum % 4 != 0) return false;
         
-        Array.Sort(nums, (l, r) => r.CompareTo(l)); // Sort in descending order
+        Array.Sort(nums);
+        Array.Reverse(nums);
         
-        int[] sidesLength = new int[4];
-        return Dfs(sidesLength, nums, 0, sum / 4);
+        return Dfs(nums, new int[4], 0, sum / 4);
     }
     
-    private bool Dfs(int[] sidesLength, int[] matches, int index, int target) {
-        if (index == matches.Length)
-            return sidesLength[0] == sidesLength[1] && sidesLength[1] == sidesLength[2] && sidesLength[2] == sidesLength[3];
+    private bool Dfs(int[] nums, int[] sums, int index, int target) {
+        if (index == nums.Length) {
+            return sums[0] == target && sums[1] == target && sums[2] == target;
+        }
         
-        for (int i = 0; i < 4; ++i) {
-            if (sidesLength[i] + matches[index] > target) // First condition
-                continue;
-            
-            int j = i;
-            while (--j >= 0) // Third condition
-                if (sidesLength[i] == sidesLength[j])
-                    break;
-            
-            if (j != -1) continue;
-            
-            sidesLength[i] += matches[index];
-            if (Dfs(sidesLength, matches, index + 1, target))
-                return true;
-            
-            sidesLength[i] -= matches[index];
+        for (int i = 0; i < 4; i++) {
+            if (sums[i] + nums[index] > target) continue;
+            sums[i] += nums[index];
+            if (Dfs(nums, sums, index + 1, target)) return true;
+            sums[i] -= nums[index];
         }
         
         return false;
     }
-
 }
