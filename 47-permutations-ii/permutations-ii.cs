@@ -17,6 +17,7 @@ public class Solution {
         {
             for (int i = 0; i < nums.Length; i++)
             {
+                //we did this as each num is going to make combinations with each num // and we have duplicate values too
                 if (used[i] || (i > 0 && nums[i] == nums[i - 1] && !used[i - 1])) continue;
                 
                 used[i] = true;
