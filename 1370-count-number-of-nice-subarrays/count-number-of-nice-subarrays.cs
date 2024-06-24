@@ -1,6 +1,5 @@
 public class Solution {
     public int NumberOfSubarrays(int[] nums, int k) {
-        
         int j = 0, odd = 0, count = 0, total = 0;
         
         for (int i = 0; i < nums.Length; i++) {
