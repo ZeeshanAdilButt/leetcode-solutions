@@ -4,7 +4,7 @@ public class Solution {
         Array.Sort(positions);
         
         
-        int low = 1, high = positions[positions.Length - 1] ;
+        int low = 1, high = positions[positions.Length - 1];
         
         
         while (low <= high) {
