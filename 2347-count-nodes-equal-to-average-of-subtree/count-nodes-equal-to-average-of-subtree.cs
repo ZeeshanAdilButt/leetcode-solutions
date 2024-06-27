@@ -12,7 +12,7 @@
  * }
  */
 public class Solution {
-    private int matchingSubtreeCount = 0; // Initialize the count of subtrees with matching averages.
+    private int matchingSubtreeCount = 0; 
 
    
     private int[] CalculateSubtreeValues(TreeNode currentNode) {
