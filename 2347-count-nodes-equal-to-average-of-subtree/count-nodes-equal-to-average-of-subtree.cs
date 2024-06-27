@@ -14,9 +14,7 @@
 public class Solution {
     private int matchingSubtreeCount = 0; // Initialize the count of subtrees with matching averages.
 
-    // A Depth-First Search (DFS) function that returns an array of two values:
-    // - The sum of values within the current subtree.
-    // - The number of nodes within the current subtree.
+   
     private int[] CalculateSubtreeValues(TreeNode currentNode) {
         if (currentNode == null)
             return new int[] { 0, 0 }; // Base case: Return 0 for both sum and number of nodes if the node is null.
