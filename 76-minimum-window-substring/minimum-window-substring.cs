@@ -1,69 +1,96 @@
 public class Solution {
-   public string MinWindow(string s, string t)
+
+public string MinWindow(string s, string t)
 {
-	if (string.IsNullOrEmpty(t))
-	{
-	return "";
-	}
 
-    Dictionary<char, int> reqCount = new Dictionary<char, int>();
-    Dictionary<char, int> window = new Dictionary<char, int>();
+    if (s== "" || t == "" || s.Length < t.Length)
+        return "";
 
-    foreach (char c in t)
-    {
-        if (!reqCount.ContainsKey(c))
-            reqCount[c] = 0;
-        reqCount[c]++;
+
+    //take count of both characters
+
+    Dictionary<char, int> targetCount = new Dictionary<char, int>();
+    Dictionary<char, int> sourceCount = new Dictionary<char, int>();
+
+    int requiredMatches = 0; // let's say 3. 
+    int foundMatches = 0; // we will only increment if source count of char is equals to targetCount of char
+
+   
+
+    foreach(char c in t){
+        if(targetCount.ContainsKey(c)){
+            targetCount[c]++;
+        }
+        else{
+
+            requiredMatches++;
+            targetCount.Add(c, 1);
+        }
     }
 
-    int current = 0;
-    int required = reqCount.Count;
+    //min answer
+    int foundleft =0;
+    int foundright =0;
+    int minWindowLength = Int32.MaxValue;
 
-    int[] res = { -1, -1 };
-    int resLen = int.MaxValue;
+    int left =0;
 
-    int left = 0;
-    for (int right = 0; right < s.Length; right++)
-    {
-        char c = s[right];
+    for(int right = 0; right < s.Length; right++){
 
-        if (reqCount.ContainsKey(c))
-        {
-            if (!window.ContainsKey(c))
-                window[c] = 0;
-            window[c]++;
+        if(!targetCount.ContainsKey(s[right]))
+            continue;
 
-            if (window[c] == reqCount[c])
-            {
-                current++;
-            }
+        if(sourceCount.ContainsKey(s[right])){
+            sourceCount[s[right]]++;
+        }
+        else{            
+            sourceCount.Add(s[right], 1);
         }
 
-        while (current == required)
-        {
-            if ((right - left + 1) < resLen)
+        if(targetCount[s[right]] == sourceCount[s[right]] )
+            foundMatches++;
+
+        if(foundMatches == requiredMatches){
+
+            if( (right - left + 1) < minWindowLength)
             {
-                res[0] = left;
-                res[1] = right;
-                resLen = (right - left + 1);
+
+                foundleft =  left;
+                foundright = right;
+                minWindowLength = right - left  + 1;
             }
 
-            char leftChar = s[left];
-            if (reqCount.ContainsKey(leftChar))
-            {
-                window[leftChar]--;
-                if (window[leftChar] < reqCount[leftChar])
+            while(foundMatches == requiredMatches){
+
+                if(targetCount.ContainsKey(s[left]) && targetCount[s[left]] == sourceCount[s[left]])
                 {
-                    current--;
+                    foundMatches--;
+                    
                 }
-            }
-            left++;
+
+                if(sourceCount.ContainsKey(s[left]))
+                    sourceCount[s[left]]--;
+                
+                left++;
+
+                if(foundMatches == requiredMatches && ( right - left + 1 ) < minWindowLength )
+                {
+                    foundleft =  left;
+                    foundright = right;
+                    minWindowLength = right - left  + 1;
+                }
+
+            }    
         }
+
     }
 
-    int leftIndex = res[0];
-    return resLen != int.MaxValue ? s.Substring(leftIndex, resLen) : "";
-}
+   
+
+   return minWindowLength == Int32.MaxValue ? "" : s.Substring(foundleft, minWindowLength);
+
+
+    }
 
 
 }
