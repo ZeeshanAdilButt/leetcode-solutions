@@ -11,45 +11,55 @@
  */
 public class Solution {
 
-        public ListNode ReverseEvenLengthGroups(ListNode head)
+    public ListNode ReverseEvenLengthGroups(ListNode head)
     {
-        ListNode prev = head; 
-        ListNode node, reverse, currNext, curr, prevNext = null;
-        int groupLen = 2; 
-        int numNodes = 0;
-        while (prev.next != null)
+        ListNode previousGroupEnd = head;
+        ListNode lastNodeInCurrentGroup, nextGroupStart, currentNode, tempNext, originalFirstNodeInGroup = null;
+        int targetGroupLength = 2;
+        int nodesInCurrentGroup = 0;
+        
+        while (previousGroupEnd.next != null)
         {
-            node = prev;
-            numNodes = 0;
-            for (int i = 0; i < groupLen; i++)
+            // Find the last node in current group
+            lastNodeInCurrentGroup = previousGroupEnd;
+            nodesInCurrentGroup = 0;
+            
+            // Count nodes in current group (up to targetGroupLength)
+            for (int i = 0; i < targetGroupLength; i++)
             {
-                if (node.next == null)
+                if (lastNodeInCurrentGroup.next == null)
                     break;
-                numNodes += 1;
-                node = node.next;
+                nodesInCurrentGroup++;
+                lastNodeInCurrentGroup = lastNodeInCurrentGroup.next;
             }
 
-            if (numNodes % 2 != 0) 
+            if (nodesInCurrentGroup % 2 != 0) // Odd length group - no reversal needed
             {
-                prev = node;
+                previousGroupEnd = lastNodeInCurrentGroup;
             }
-            else
+            else // Even length group - reverse it
             {
-                reverse = node.next;
-                curr = prev.next;
-                for (int j = 0; j < numNodes; j++)
+                nextGroupStart = lastNodeInCurrentGroup.next;
+                currentNode = previousGroupEnd.next;
+                
+                // Reverse the nodes in the group
+                for (int j = 0; j < nodesInCurrentGroup; j++)
                 {
-                    currNext = curr.next;
-                    curr.next = reverse;
-                    reverse = curr;
-                    curr = currNext;
+                    tempNext = currentNode.next;
+                    currentNode.next = nextGroupStart;
+                    nextGroupStart = currentNode;
+                    currentNode = tempNext;
                 }
-                prevNext = prev.next;
-                prev.next = node;
-                prev = prevNext;
+                
+                // Connect the reversed group
+                originalFirstNodeInGroup = previousGroupEnd.next;
+                previousGroupEnd.next = lastNodeInCurrentGroup;
+                previousGroupEnd = originalFirstNodeInGroup;
             }
-            groupLen += 1;
+            
+            targetGroupLength++;
         }
+        
         return head;
     }
 }
