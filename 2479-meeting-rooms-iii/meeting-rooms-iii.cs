@@ -1,11 +1,16 @@
 public class Solution {
-
     public int MostBooked(int n, int[][] meetings) {
         Array.Sort(meetings, (a, b) => a[0].CompareTo(b[0]));
         
         PriorityQueue<int, int> available = new PriorityQueue<int, int>();
-        
-        PriorityQueue<(long endTime, int roomId), (long, int)> used = new PriorityQueue<(long, int), (long, int)>();
+       
+         // Used rooms queue with custom comparer using ternary operator
+        PriorityQueue<(long endTime, int roomId), (long endTime, int roomId)> used = 
+            new PriorityQueue<(long, int), (long, int)>(
+                Comparer<(long, int)>.Create((a, b) => 
+                    a.Item1 == b.Item1 ? a.Item2.CompareTo(b.Item2) : a.Item1.CompareTo(b.Item1)
+                )
+            );
         
         for (int i = 0; i < n; i++) {
             available.Enqueue(i, i);
