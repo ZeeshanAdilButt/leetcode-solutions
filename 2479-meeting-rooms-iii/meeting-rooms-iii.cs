@@ -5,6 +5,8 @@ public class Solution {
         PriorityQueue<int, int> available = new PriorityQueue<int, int>();
        
          // Used rooms queue with custom comparer using ternary operator
+         //prioritize first by item1 (end time) then item 2 (room id)
+         
         PriorityQueue<(long endTime, int roomId), (long endTime, int roomId)> used = 
             new PriorityQueue<(long, int), (long, int)>(
                 Comparer<(long, int)>.Create((a, b) => 
@@ -17,6 +19,7 @@ public class Solution {
         }
         
         int[] count = new int[n];
+
         foreach (int[] meeting in meetings) {
             long start = meeting[0];
             long end = meeting[1];
