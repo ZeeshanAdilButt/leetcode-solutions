@@ -1,37 +1,43 @@
 public class Solution {
- public int LargestInteger(int num) {
-        
-        var evens = new List<int>();
-        var odds = new List<int>();
-        var order = new List<bool>();
-        
-        while(num > 0){
-            int digit = num % 10;
-            num /= 10;
-            if(1 == (digit & 1)){
-                odds.Add(digit);
-                order.Add(true);
-            }else{
-                evens.Add(digit);
-                order.Add(false);
+   public int LargestInteger(int num)
+    {
+        List<int> digits = new List<int>();
+        foreach (char c in num.ToString())
+        {
+            digits.Add(c - '0');
+        }
+
+        // Use negative values to simulate a MaxHeap using PriorityQueue
+        var oddHeap = new PriorityQueue<int, int>();
+        var evenHeap = new PriorityQueue<int, int>();
+
+        foreach (int d in digits)
+        {
+            if (d % 2 == 0)
+                evenHeap.Enqueue(d, -d); 
+            else
+                oddHeap.Enqueue(d, -d);
+        }
+
+        List<int> result = new List<int>();
+        foreach (int d in digits)
+        {
+            if (d % 2 == 0)
+            {
+                result.Add(evenHeap.Dequeue());
+            }
+            else
+            {
+                result.Add(oddHeap.Dequeue());
             }
         }
-        
-        odds.Sort((a, b) => b - a);
-        evens.Sort((a, b) => b - a);
-        
-        int oddIndex = 0;
-        int evenIndex = 0;
-        
-        var answer = 0;
-        for(int i = order.Count - 1; i >= 0; i--){
-            answer *= 10;
-            if(order[i]){
-                answer += odds[oddIndex++];
-            }else{
-                answer += evens[evenIndex++];
-            }
+
+        int outputNumber = 0;
+        foreach (int d in result)
+        {
+            outputNumber = outputNumber * 10 + d;
         }
-        return answer;
+
+        return outputNumber;
     }
 }
