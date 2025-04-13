@@ -2,6 +2,7 @@ public class Solution {
     public int KthSmallest(int[][] matrix, int k)
     {
         int n = matrix.Length;
+        int m = matrix[0].Length;
 
         // PriorityQueue stores (value, row, col) with value as the priority
         var minHeap = new PriorityQueue<(int value, int row, int col), int>();
@@ -20,7 +21,7 @@ public class Solution {
             int r = element.row, c = element.col;
 
             // Push next element in the same row
-            if (c < n - 1)
+            if (c < m - 1)
             {
                 minHeap.Enqueue((matrix[r][c + 1], r, c + 1), matrix[r][c + 1]);
             }
