@@ -16,13 +16,15 @@ public class Solution {
         }
 
         // Add extra students to the classes with max gain
-        while (extraStudents-- > 0)
+        while (extraStudents > 0)
         {
             var (gain, pass, total) = maxHeap.Dequeue();
             pass++;
             total++;
             double newGain = CalculateGain(pass, total);
             maxHeap.Enqueue((newGain, pass, total), newGain);
+
+            extraStudents--;
         }
 
         // Calculate the final average pass ratio
