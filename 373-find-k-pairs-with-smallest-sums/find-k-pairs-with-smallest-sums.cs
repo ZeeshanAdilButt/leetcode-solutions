@@ -3,6 +3,7 @@ public class Solution {
 public IList<IList<int>> KSmallestPairs(int[] list1, int[] list2, int k)
     {
         var result = new List<IList<int>>();
+
         if (list1.Length == 0 || list2.Length == 0 || k == 0)
             return result;
 
@@ -15,7 +16,7 @@ public IList<IList<int>> KSmallestPairs(int[] list1, int[] list2, int k)
             minHeap.Enqueue((i, 0), list1[i] + list2[0]);
         }
 
-        while (k-- > 0 && minHeap.Count > 0)
+        while (k > 0 && minHeap.Count > 0)
         {
             var (i, j) = minHeap.Dequeue();
             result.Add(new List<int> { list1[i], list2[j] });
@@ -24,7 +25,11 @@ public IList<IList<int>> KSmallestPairs(int[] list1, int[] list2, int k)
             {
                 minHeap.Enqueue((i, j + 1), list1[i] + list2[j + 1]);
             }
+
+            k--;
         }
+
+
 
         return result;
     }
