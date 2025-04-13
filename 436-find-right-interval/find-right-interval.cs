@@ -35,57 +35,49 @@ public int[] FindRightInterval(int[][] intervals)
 
         return result;
     }
-    
-    // public int[] FindRightInterval(int[][] intervals)
-    // {
-    //     int n = intervals.Length;
-    //     int[] result = new int[n];
-    //     Array.Fill(result, -1);
-        
-    //     PriorityQueue<int, int> startHeap = new PriorityQueue<int, int>();
-    //     PriorityQueue<int, int> endHeap = new PriorityQueue<int, int>();
-        
-    //     for (int i = 0; i < n; i++)
-    //     {
-    //         startHeap.Enqueue(i, intervals[i][0]);
-    //         endHeap.Enqueue(i, intervals[i][1]);
-    //     }
-        
-    //     // Store all start intervals in a sorted list for binary search
-    //     List<(int value, int index)> sortedStarts = new List<(int value, int index)>();
-    //     while (startHeap.Count > 0)
-    //     {
-    //         int index = startHeap.Dequeue();
-    //         sortedStarts.Add((intervals[index][0], index));
-    //     }
-        
-    //     while (endHeap.Count > 0)
-    //     {
-    //         int index = endHeap.Dequeue();
-    //         int endValue = intervals[index][1];
-            
-    //         // Binary search for the first interval that starts after or at the current end
-    //         int left = 0;
-    //         int right = sortedStarts.Count - 1;
-    //         int resultIndex = -1;
-            
-    //         while (left <= right)
-    //         {
-    //             int mid = left + (right - left) / 2;
-    //             if (sortedStarts[mid].value >= endValue)
-    //             {
-    //                 resultIndex = sortedStarts[mid].index;
-    //                 right = mid - 1;
-    //             }
-    //             else
-    //             {
-    //                 left = mid + 1;
-    //             }
-    //         }
-            
-    //         result[index] = resultIndex;
-    //     }
-        
-    //     return result;
-    // }
+
+
+//binary search solution
+//    public int[] FindRightInterval(int[][] intervals)
+//     {
+//         int n = intervals.Length;
+//         int[] result = new int[n];
+
+//         // Create a list of (start value, index) to remember the original position
+//         List<(int start, int index)> starts = new List<(int, int)>();
+//         for (int i = 0; i < n; i++)
+//         {
+//             starts.Add((intervals[i][0], i));
+//         }
+
+//         // Sort the list based on start values (so we can binary search)
+//         starts.Sort((a, b) => a.start.CompareTo(b.start));
+
+//         // For each interval, find the smallest start >= current interval's end using binary search
+//         for (int i = 0; i < n; i++)
+//         {
+//             int end = intervals[i][1];
+//             int left = 0, right = n - 1;
+//             int indexFound = -1;
+
+//             // Binary search to find the minimal start >= end
+//             while (left <= right)
+//             {
+//                 int mid = left + (right - left) / 2;
+//                 if (starts[mid].start >= end)
+//                 {
+//                     indexFound = starts[mid].index;
+//                     right = mid - 1; // try to find a smaller one
+//                 }
+//                 else
+//                 {
+//                     left = mid + 1;
+//                 }
+//             }
+
+//             result[i] = indexFound;
+//         }
+
+//         return result;
+//     }
 }
