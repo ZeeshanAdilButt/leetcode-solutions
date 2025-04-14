@@ -1,6 +1,6 @@
 public class Solution {
 
-       public int ThirdMax(int[] nums)
+    public int ThirdMax(int[] nums)
     {
         var top = new SortedSet<int>();
 
@@ -19,7 +19,7 @@ public class Solution {
         // Else return the largest
         return top.Count == 3 ? top.Min : top.Max;
     }
-    
+
     // public int ThirdMax(int[] nums)
     // {
     //     var minHeap = new PriorityQueue<int, int>();
