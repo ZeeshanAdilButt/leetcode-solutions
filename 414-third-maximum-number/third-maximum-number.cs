@@ -4,8 +4,13 @@ public class Solution {
         var minHeap = new PriorityQueue<int, int>();
         var seen = new HashSet<int>();
 
+        int max = int.MinValue;
+
         foreach (int num in nums)
         {
+             if (num > max)
+                max = num;
+
             if (seen.Contains(num))
                 continue;
 
@@ -23,18 +28,11 @@ public class Solution {
         {
             return minHeap.Peek(); // third max
         }
-
-        // Otherwise, return the max from the set
-        int max = int.MinValue;
-        foreach (int num in seen)
-        {
-            if (num > max)
-                max = num;
+        else {
+            return max;
         }
-
-        return max;
     }
-    
+
     // public int ThirdMax(int[] nums) {
     //     long max1 = long.MinValue, max2 = long.MinValue, max3 = long.MinValue;
         
