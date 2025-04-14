@@ -6,22 +6,22 @@ public class Solution {
      public string KthLargestNumber(string[] nums, int k)
     {
 
-       var maxHeap = new PriorityQueue<string, string>(
-            Comparer<string>.Create((a, b) => a.Length != b.Length 
-                ? b.Length.CompareTo(a.Length) 
-                : string.Compare(b, a, StringComparison.Ordinal))
+        // Min-heap that keeps the k largest elements
+        var minHeap = new PriorityQueue<string, string>(
+            Comparer<string>.Create((a, b) =>
+                a.Length != b.Length
+                    ? a.Length.CompareTo(b.Length)
+                    : string.Compare(a, b, StringComparison.Ordinal))
         );
 
         foreach (var num in nums)
         {
-            maxHeap.Enqueue(num, num);
+            minHeap.Enqueue(num, num);
+
+            if (minHeap.Count > k)
+                minHeap.Dequeue(); 
         }
 
-        while (--k > 0)
-        {
-            maxHeap.Dequeue();
-        }
-
-        return maxHeap.Dequeue();
+        return minHeap.Peek(); 
     }
 }
