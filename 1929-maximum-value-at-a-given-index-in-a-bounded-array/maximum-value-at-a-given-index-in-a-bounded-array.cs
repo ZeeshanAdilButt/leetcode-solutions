@@ -25,7 +25,8 @@ public class Solution
         if (value >= n - index) 
         {
              // sum of sequence between 2 numbers is [left + right] * n / 2
-            count += (long) (n - index) * (value + (value - n + 1 + index)) / 2;
+            // count += (long) (n - index) * (value + (value - n + 1 + index)) / 2;
+            count += (long) (n - index) * (value + (value - ( n - index ) + 1)) / 2;
         } 
         else 
         {
