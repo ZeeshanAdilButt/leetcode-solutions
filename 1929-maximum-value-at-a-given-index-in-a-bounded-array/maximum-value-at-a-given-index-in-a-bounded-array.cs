@@ -29,6 +29,7 @@ public class Solution
         } 
         else 
         {
+            // n (n + 1 ) / 2 + remaining 1s on the right 
             count += (long)value * (value + 1)  / 2 + n - index - value;
         }   
         
