@@ -35,8 +35,8 @@ public class Solution {
 
     public int CoinChange(int[] coins, int amount) {
         
-        // Array.Sort(coins);
-        // Array.Reverse(coins);
+        Array.Sort(coins);
+        Array.Reverse(coins);
 
         int minCoins = Dfs(amount, coins);
 
