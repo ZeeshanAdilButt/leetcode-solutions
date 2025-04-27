@@ -7,8 +7,9 @@ public class Solution {
             return memo[amount];
 
         int res = int.MaxValue;
+        
         foreach (int coin in coins) {
-            if (amount - coin >= 0) {
+            if (coin <= amount) {
                 int result = Dfs(amount - coin, coins);
                 if (result != int.MaxValue) {
                     res = Math.Min(res, 1 + result);
