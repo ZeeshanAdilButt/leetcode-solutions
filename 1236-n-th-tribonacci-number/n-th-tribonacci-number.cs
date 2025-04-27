@@ -29,9 +29,9 @@ public class Solution {
 
         int res = 0;
 
-         res+= Tribonacci(n -3, memo) ;
-         res+=  Tribonacci(n -2, memo) ;
         res+=   Tribonacci(n -1, memo );
+         res+=  Tribonacci(n -2, memo) ;
+         res+= Tribonacci(n -3, memo) ;
 
         memo[n] = res;
 
