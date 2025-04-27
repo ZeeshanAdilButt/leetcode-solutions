@@ -10,18 +10,21 @@ public class Solution {
 
         int[] memo = new int[n + 1];
 
-        memo[0]= 0;
-        memo[1]=1;
-        memo[2]=1;
+        int firstNum = 0;
+        int secondNum =1;
+        int thirdNum =1;
+
+        int res  = 0;
 
         for (int i = 3; i < n +1; i++){
 
-            memo[i] = memo[i-1] +  memo[i-2] +  memo[i-3];
+            res = firstNum + secondNum + thirdNum;
+            firstNum = secondNum;
+            secondNum = thirdNum;
+            thirdNum = res;
         }
 
-    
-
-        return memo[n];
+        return res;
     
         
     }
