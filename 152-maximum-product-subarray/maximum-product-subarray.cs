@@ -3,10 +3,10 @@ public class Solution {
         
         int actualMax = nums.Max();
         
-        int currentMax = 1;
-        int currentMin = 1;
+        int currentMax =  nums[0];
+        int currentMin =  nums[0];
         
-        for(int i=0; i < nums.Length; i++){
+        for(int i=1; i < nums.Length; i++){
             
            if (nums[i] == 0) { 
                 currentMax = 1;
