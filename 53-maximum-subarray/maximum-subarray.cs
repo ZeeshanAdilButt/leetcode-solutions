@@ -3,10 +3,10 @@ public class Solution {
         
         
         int maxSum = nums[0];
-        int currentMax = 0;
+        int currentMax = nums[0];
         
         
-        for (int i =0; i < nums.Length; i++){
+        for (int i =1; i < nums.Length; i++){
             
             currentMax= Math.Max(nums[i], currentMax+nums[i]);
             
