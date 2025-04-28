@@ -1,28 +1,42 @@
 public class Solution {
     public int MaxProduct(int[] nums) {
-        
-        int actualMax = nums.Max();
-        
-        int currentMax =  nums[0];
-        int currentMin =  nums[0];
-        
-        for(int i=1; i < nums.Length; i++){
-            
-           if (nums[i] == 0) { 
-                currentMax = 1;
-                currentMin = 1;
-                continue;
-            }
-                     
-            var temp = currentMax * nums[i];
-            currentMax = Math.Max(nums[i],Math.Max(nums[i] * currentMax, nums[i] * currentMin ));
-            currentMin = Math.Min(temp, Math.Min( nums[i], nums[i] * currentMin ));
-            
-            actualMax = Math.Max(actualMax,currentMax);
+        List<List<int>> A = new List<List<int>>();
+        List<int> cur = new List<int>();
+        int res = int.MinValue;
+
+        foreach (int num in nums) {
+            res = Math.Max(res, num);
+            if (num == 0) {
+                if (cur.Count > 0) {
+                    A.Add(new List<int>(cur));
+                }
+                cur.Clear();
+            } else cur.Add(num);
         }
-        
-        
-        return actualMax;
-        
+        if (cur.Count > 0) A.Add(new List<int>(cur));
+
+        foreach (var sub in A) {
+            int negs = 0;
+            foreach (var i in sub) {
+                if (i < 0) negs++;
+            }
+
+            int prod = 1;
+            int need = (negs % 2 == 0) ? negs : (negs - 1);
+            negs = 0;
+            for (int i = 0, j = 0; i < sub.Count; i++) {
+                prod *= sub[i];
+                if (sub[i] < 0) {
+                    negs++;
+                    while (negs > need) {
+                        prod /= sub[j];
+                        if (sub[j] < 0) negs--;
+                        j++;
+                    }
+                }
+                if (j <= i) res = Math.Max(res, prod);
+            }
+        }
+        return res;
     }
 }
