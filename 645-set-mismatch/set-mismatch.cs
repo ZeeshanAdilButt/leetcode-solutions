@@ -1,5 +1,6 @@
 public class Solution {
     public int[] FindErrorNums(int[] nums) {
+
         int duplicated = 0;
         int missing = 0;
         int[] pair = new int[2];
