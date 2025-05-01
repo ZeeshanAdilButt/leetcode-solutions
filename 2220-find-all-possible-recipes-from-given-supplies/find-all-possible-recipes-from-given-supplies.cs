@@ -1,44 +1,42 @@
 public class Solution {
-
     public IList<string> FindAllRecipes(
         string[] recipes,
         IList<IList<string>> ingredients,
         string[] supplies
     )
-     {
-        var available = new HashSet<string>(supplies); // initial supplies
-        var recipeQueue = new Queue<int>(); // process recipe indices
+    {
+        var suppliesRashan = new HashSet<string>(supplies);
+        var recipeQueue = new Queue<int>();
         var createdRecipes = new List<string>();
 
         for (int i = 0; i < recipes.Length; i++) {
             recipeQueue.Enqueue(i);
         }
 
-        int lastSize = -1;
+        bool addedNewItem = true;
 
-        while (available.Count > lastSize) {
-
-            lastSize = available.Count;
+        while (addedNewItem) {
+            addedNewItem = false;
 
             int recipeQueueSize = recipeQueue.Count;
 
             for (int i = 0; i < recipeQueueSize; i++) {
-
                 int recipeIdx = recipeQueue.Dequeue();
                 bool canCreate = true;
 
                 foreach (var ingredient in ingredients[recipeIdx]) {
-                    if (!available.Contains(ingredient)) {
+                    if (!suppliesRashan.Contains(ingredient)) {
                         canCreate = false;
                         break;
                     }
                 }
 
                 if (canCreate) {
-                    available.Add(recipes[recipeIdx]);
+                    suppliesRashan.Add(recipes[recipeIdx]);
                     createdRecipes.Add(recipes[recipeIdx]);
+                    addedNewItem = true; // we made progress!
                 } else {
-                    recipeQueue.Enqueue(recipeIdx);
+                    recipeQueue.Enqueue(recipeIdx); // try again later
                 }
             }
         }
