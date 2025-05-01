@@ -18,9 +18,11 @@ public class Solution {
         int longest = 0, secondLongest = 0;
 
         foreach (int child in tree[node]) {
-            int childLen = Dfs(child, tree, s);
 
+            int childLen = Dfs(child, tree, s);
+            
             if (s[child] == s[node]) continue;
+
 
             if (childLen > longest) {
                 secondLongest = longest;
