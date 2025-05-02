@@ -1,7 +1,7 @@
 public class Solution {
     public int FindTheDistanceValue(int[] arr1, int[] arr2, int d) {
 
-        Array.Sort(arr1);
+        // Array.Sort(arr1);
         Array.Sort(arr2);
 
         int count =0;
@@ -27,7 +27,7 @@ public class Solution {
 
                 int difference = Math.Abs(arr1[i] - arr2[mid]);
 
-                if (  difference <= d)
+                if (difference <= d)
                 {
 
                     targetExist = false;
@@ -41,7 +41,6 @@ public class Solution {
 
                    right = mid - 1;
                 }
-
             }
 
             if(targetExist)
