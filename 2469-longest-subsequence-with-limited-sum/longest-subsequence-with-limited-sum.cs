@@ -19,24 +19,20 @@ public class Solution {
         return answer;
     }
 
-    public static int BinarySearch(int[] prefixSum, int target)
+    public static int BinarySearch(int[] arr, int target)
     {
-        int low = 0, high = prefixSum.Length - 1;
+        int left = 0, right = arr.Length;
 
-        while (low <= high)
+        while (left < right)
         {
-            int mid = (low + high) / 2;
+            int mid = left + (right - left) / 2;
 
-            if (prefixSum[mid] <= target)
-            {
-                low = mid + 1;
-            }
-            else
-            {
-                high = mid - 1;
-            }
+        if (arr[mid] <= target)
+            left = mid + 1;
+        else
+                right = mid;
         }
-        
-        return low;
+
+        return left;
     }
 }
