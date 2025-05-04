@@ -8,7 +8,7 @@ public class Solution {
 
         while (low < high) {
             int mid = (low + high) / 2;
-            int count = CountPairsWithMaxDistance(nums, mid);
+            int count = CountPairsWithMaxDistance(nums, mid, k);
 
             if (count < k) {
                 low = mid + 1;
@@ -21,7 +21,7 @@ public class Solution {
     }
 
     // Count number of pairs with distance <= maxDistance
-    private int CountPairsWithMaxDistance(int[] nums, int maxDistance) {
+    private int CountPairsWithMaxDistance(int[] nums, int maxDistance, int k) {
         int count = 0;
         int left = 0;
 
@@ -30,6 +30,9 @@ public class Solution {
                 left++;
             }
             count += right - left;
+
+            if(count >= k)
+                   return count;
         }
 
         return count;
