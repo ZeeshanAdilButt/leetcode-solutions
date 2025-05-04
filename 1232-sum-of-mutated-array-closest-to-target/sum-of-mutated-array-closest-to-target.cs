@@ -15,6 +15,7 @@ public class Solution {
 
         // Now determine the best cap value for remaining elements
         int candidate = target / (n - index);
+        
 
         // Compare candidate vs candidate + 1 to see which gives a sum closer to target
         int sumWithCandidate = candidate * (n - index);
