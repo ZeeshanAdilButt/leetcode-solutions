@@ -1,38 +1,49 @@
 public class Solution {
-    public int MaxDistance(int[] positions, int m) {
+   static bool CanPlaceBalls(int x, int[] position, int m)
+    {
+        int prev = position[0];
         
-        Array.Sort(positions);
+        int balls = 1;
+
+        for (int i = 1; i < position.Length && balls < m; ++i)
+        {
+            int curr = position[i];
+            
+            if (curr - prev >= x)
+            {
+                balls += 1;
+                prev = curr;
+            }
+        }
         
+        return balls == m;
+    }
+
+    public int MaxDistance(int[] position, int m)
+    {
+        Array.Sort(position);
         
-        int low = 1, high = positions[positions.Length - 1];
+        int force = 0;
         
+        int low = 1;
         
-        while (low <= high) {
+        int high = (position[position.Length - 1] - position[0]) / (m - 1);
+        
+        while (low <= high)
+        {
             int mid = (low + high) / 2;
             
-            if (CanPlaceBalls(positions, m, mid)) {
+            if (CanPlaceBalls(mid, position, m))
+            {
+                force = mid;
                 low = mid + 1;
-            } else {
+            }
+            else
+            {
                 high = mid - 1;
             }
         }
-        return high;
-    }
-
-    private bool CanPlaceBalls(int[] positions, int m, int minDist) {
         
-        int count = 1;
-        int lastPos = positions[0];
-        
-        for (int i = 1; i < positions.Length; i++) {
-            if (positions[i] - lastPos >= minDist) {
-                count++;
-                lastPos = positions[i];
-                if (count == m) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return force;
     }
 }
