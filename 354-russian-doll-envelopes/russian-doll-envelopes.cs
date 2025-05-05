@@ -5,9 +5,9 @@ public class Solution
 {
     private int FindPosition(List<int> lis, int height)
     {
-        int left = 0, right = lis.Count - 1;
+        int left = 0, right = lis.Count;
     
-        while (left <= right)
+        while (left < right)
         {
             int mid = (left + right) / 2;
             
@@ -17,7 +17,7 @@ public class Solution
             }
             else
             {
-                right = mid - 1;
+                right = mid;
             }
         }
     
