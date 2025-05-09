@@ -1,7 +1,7 @@
 public class Solution {
 
     public int[][] Transpose(int[][] matrix) {
-        
+
         int ROWS = matrix.Length;
         int COLS = matrix[0].Length;
 
@@ -9,9 +9,8 @@ public class Solution {
         if (ROWS == COLS) {
             for (int r = 0; r < ROWS; r++) {
                 for (int c = 0; c < r; c++) {
-                    int tmp = matrix[r][c];
-                    matrix[r][c] = matrix[c][r];
-                    matrix[c][r] = tmp;
+                    (matrix[r][c], matrix[c][r]) = (matrix[c][r], matrix[r][c]);
+
                 }
             }
 
