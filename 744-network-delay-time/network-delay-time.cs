@@ -14,30 +14,29 @@ public class Solution {
 
             adjacency[source].Add((destination, travelTime));
         }
-
-        // PriorityQueue<Element=node and time, Priority=time>
-        
+       
         var pq = new PriorityQueue<(int node, int time), int>();
 
         pq.Enqueue((k, 0), 0);  // Start from node k with time 0
 
         var visited = new HashSet<int>();
-        int delays = 0;
+        int totalTime = 0;
 
         while (pq.Count > 0)
         {
-            var (node, time) = pq.Dequeue();  // Gets the node and time
+            var (node, time) = pq.Dequeue();
 
             if (visited.Contains(node))
                 continue;
 
             visited.Add(node);
-            delays = Math.Max(delays, time);
 
-            if (!adjacency.TryGetValue(node, out var neighbors))
+            totalTime = Math.Max(totalTime, time);
+
+            if (!adjacency.ContainsKey(node))
                 continue;
 
-            foreach (var (neighbor, weight) in neighbors)
+            foreach (var (neighbor, weight) in adjacency[node])
             {
                 if (!visited.Contains(neighbor))
                 {
@@ -46,6 +45,6 @@ public class Solution {
             }
         }
 
-        return visited.Count == n ? delays : -1;
+        return visited.Count == n ? totalTime : -1;
     }
 }
