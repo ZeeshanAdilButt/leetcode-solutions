@@ -1,6 +1,6 @@
 public class Solution {
     public int NetworkDelayTime(int[][] times, int n, int k) {
-         // Build adjacency list
+        
         var adjacency = new Dictionary<int, List<(int, int)>>();
 
         foreach (var time in times)
@@ -15,16 +15,18 @@ public class Solution {
             adjacency[source].Add((destination, travelTime));
         }
 
-        // Use built-in PriorityQueue in C# (available from .NET 6)
-        var pq = new PriorityQueue<int, int>(); // (node, time) with time as priority
-        pq.Enqueue(k, 0);
+        // PriorityQueue<Element=node and time, Priority=time>
+        
+        var pq = new PriorityQueue<(int node, int time), int>();
+
+        pq.Enqueue((k, 0), 0);  // Start from node k with time 0
 
         var visited = new HashSet<int>();
         int delays = 0;
 
         while (pq.Count > 0)
         {
-            pq.TryDequeue(out int node, out int time);
+            var (node, time) = pq.Dequeue();  // Gets the node and time
 
             if (visited.Contains(node))
                 continue;
@@ -35,11 +37,11 @@ public class Solution {
             if (!adjacency.TryGetValue(node, out var neighbors))
                 continue;
 
-            foreach (var (neighborNode, neighborTime) in neighbors)
+            foreach (var (neighbor, weight) in neighbors)
             {
-                if (!visited.Contains(neighborNode))
+                if (!visited.Contains(neighbor))
                 {
-                    pq.Enqueue(neighborNode, time + neighborTime);
+                    pq.Enqueue((neighbor, time + weight), time + weight);
                 }
             }
         }
