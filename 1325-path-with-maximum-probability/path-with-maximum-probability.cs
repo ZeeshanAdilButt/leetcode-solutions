@@ -13,7 +13,7 @@ public class Solution {
             int u = edges[i][0], v = edges[i][1];
 
             double prob = succProb[i];
-            
+
             graph[u].Add((v, prob));
             graph[v].Add((u, prob));
         }
@@ -21,9 +21,9 @@ public class Solution {
         double[] maxProb = new double[n];
         maxProb[start] = 1.0;
 
-        var pq = new PriorityQueue<(double, int), double>(Comparer<double>.Create((a, b) => b.CompareTo(a)));
+        var pq = new PriorityQueue<(double, int), double>();
 
-        pq.Enqueue((1.0, start), 1.0);
+        pq.Enqueue((1.0, start), -1.0);
 
         while (pq.Count > 0)
         {
@@ -40,7 +40,7 @@ public class Solution {
                 if (newProb > maxProb[nextNode])
                 {
                     maxProb[nextNode] = newProb;
-                    pq.Enqueue((newProb, nextNode), newProb);
+                    pq.Enqueue((newProb, nextNode), -newProb);
                 }
             }
         }
