@@ -23,10 +23,10 @@ public class Solution {
 
         while (queue.Count > 0)
         {
-            int[] current = queue.Peek();
+            int[] current = queue.Dequeue();
             int station = current[0];
             int busesTaken = current[1];
-            queue.Dequeue();
+            
 
             if (station == dest)
             {
