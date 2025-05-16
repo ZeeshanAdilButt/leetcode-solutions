@@ -17,9 +17,11 @@ public class Solution {
     Dictionary<int, int> indices = new Dictionary<int, int>();
 
     public TreeNode BuildTree(int[] preorder, int[] inorder) {
+
         for (int i = 0; i < inorder.Length; i++) {
             indices[inorder[i]] = i;
         }
+        
         return Dfs(preorder, 0, inorder.Length - 1);
     }
 
