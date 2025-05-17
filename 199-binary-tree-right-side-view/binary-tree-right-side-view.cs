@@ -15,21 +15,30 @@
    
 public class Solution {
     public IList<int> RightSideView(TreeNode root) {
-        List<int> result = new List<int>();
-        RightView(root, result, 0);
-        return result;
-    }
-    
-    public void RightView(TreeNode curr, List<int> result, int currDepth) {
-        if (curr == null) {
-            return;
-        }
-        if (currDepth == result.Count) {
-            result.Add(curr.val);
-        }
+
+        List<int> res = new List<int>();
         
-        RightView(curr.right, result, currDepth + 1);
-        RightView(curr.left, result, currDepth + 1);
+        if (root == null) return res;
+
+        Queue<TreeNode> q = new Queue<TreeNode>();
+        q.Enqueue(root);
+
+        while (q.Count > 0) {
+            int qLen = q.Count;
+            TreeNode rightSide = null;
+
+            for (int i = 0; i < qLen; i++) {
+                TreeNode node = q.Dequeue();
+                rightSide = node;
+
+                if (node.left != null) q.Enqueue(node.left);
+                if (node.right != null) q.Enqueue(node.right);
+            }
+
+            res.Add(rightSide.val); // No need to check for null
+        }
+
+        return res;
     }
 }
 
