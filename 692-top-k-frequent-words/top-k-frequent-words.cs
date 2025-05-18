@@ -14,13 +14,21 @@ public class Solution {
             frequencyMap[word]++;
         }
 
+        int kth =0;
+
         foreach (var entry in frequencyMap) {
+
+
             string word = entry.Key;
             int frequency = entry.Value;
+            
             if (buckets[frequency] == null) {
                 buckets[frequency] = new Trie();
             }
+            
             buckets[frequency].AddWord(word);
+
+            kth++;
         }
 
         for (int i = buckets.Length - 1; i >= 0 && topK.Count < k; i--) {
@@ -62,7 +70,7 @@ class Trie {
     }
 
     public void AddWord(string word) {
-        
+
         TrieNode cur = Root;
 
         foreach (char c in word) {
