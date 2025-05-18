@@ -1,26 +1,28 @@
 public class Solution {
-    public bool IsIsomorphic(string string1, string string2) {
+   public bool IsIsomorphic(string s, string t) {
+    if (s.Length != t.Length) return false;  // ✅ length check
 
-         Dictionary<char, char> mapStr1Str2 = new Dictionary<char, char>();
-        Dictionary<char, char> mapStr2Str1 = new Dictionary<char, char>();
+    var mapST = new Dictionary<char, char>();
+    var mapTS = new Dictionary<char, char>();
 
-        int i = 0, j = 0;
+    for (int i = 0; i < s.Length; i++) {
+        char c1 = s[i];
+        char c2 = t[i];
 
-        while (i < string1.Length)
-        {
-            char char1 = string1[i++];
-            char char2 = string2[j++];
-
-            if (mapStr1Str2.ContainsKey(char1) && mapStr1Str2[char1] != char2)
-                return false;
-
-            if (mapStr2Str1.ContainsKey(char2) && mapStr2Str1[char2] != char1)
-                return false;
-
-            mapStr1Str2[char1] = char2;
-            mapStr2Str1[char2] = char1;
+        if (mapST.ContainsKey(c1)) {
+            if (mapST[c1] != c2) return false;
+        } else {
+            mapST[c1] = c2;
         }
 
-        return true;
+        if (mapTS.ContainsKey(c2)) {
+            if (mapTS[c2] != c1) return false;
+        } else {
+            mapTS[c2] = c1;
+        }
     }
+
+    return true;
+}
+
 }
