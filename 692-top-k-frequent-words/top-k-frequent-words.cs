@@ -14,7 +14,6 @@ public class Solution {
             frequencyMap[word]++;
         }
 
-        int kth =0;
 
         foreach (var entry in frequencyMap) {
 
@@ -28,7 +27,6 @@ public class Solution {
             
             buckets[frequency].AddWord(word);
 
-            kth++;
         }
 
         for (int i = buckets.Length - 1; i >= 0 && topK.Count < k; i--) {
