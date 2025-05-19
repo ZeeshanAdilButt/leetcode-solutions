@@ -14,6 +14,7 @@ public class Solution
                 if (emailToIndex.ContainsKey(email))
                 {
                     uf.Union(i, emailToIndex[email]);
+                    continue;
                 }
                 else
                 {
