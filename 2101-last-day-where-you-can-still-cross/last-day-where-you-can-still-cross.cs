@@ -28,11 +28,11 @@ public class Solution {
         int rightNode = rows * cols + 1;
 
         int[][] waterDirections = {
-    new int[] { 1, 0 }, new int[] { 0, 1 },
-    new int[] { -1, 0 }, new int[] { 0, -1 },
-    new int[] { 1, 1 }, new int[] { 1, -1 },
-    new int[] { -1, 1 }, new int[] { -1, -1 }
-};
+            new int[] { 1, 0 }, new int[] { 0, 1 },
+            new int[] { -1, 0 }, new int[] { 0, -1 },
+            new int[] { 1, 1 }, new int[] { 1, -1 },
+            new int[] { -1, 1 }, new int[] { -1, -1 }
+        };
 
 
         int[][] convertedWaterCells = new int[waterCells.Length][];
