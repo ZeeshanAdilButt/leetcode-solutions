@@ -16,7 +16,9 @@ public class Solution {
 
     public int LatestDayToCross(int rows, int cols, int[][] waterCells) {
         int day = 0;
+        
         int[][] matrix = new int[rows][];
+
         for (int i = 0; i < rows; i++)
         {
             matrix[i] = new int[cols];
@@ -25,7 +27,13 @@ public class Solution {
         int leftNode = 0;
         int rightNode = rows * cols + 1;
 
-        int[][] waterDirections = { new int[] { 1, 0 }, new int[] { 0, 1 }, new int[] { -1, 0 }, new int[] { 0, -1 }, new int[] { 1, 1 }, new int[] { 1, -1 }, new int[] { -1, 1 }, new int[] { -1, -1 } };
+        int[][] waterDirections = {
+    new int[] { 1, 0 }, new int[] { 0, 1 },
+    new int[] { -1, 0 }, new int[] { 0, -1 },
+    new int[] { 1, 1 }, new int[] { 1, -1 },
+    new int[] { -1, 1 }, new int[] { -1, -1 }
+};
+
 
         int[][] convertedWaterCells = new int[waterCells.Length][];
 
@@ -66,8 +74,10 @@ public class Solution {
             {
                 break;
             }
+
             day++;
         }
+
         return day;
     }
 }
