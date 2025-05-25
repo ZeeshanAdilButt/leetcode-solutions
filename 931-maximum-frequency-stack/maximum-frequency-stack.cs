@@ -40,13 +40,7 @@ public class FreqStack {
             frequency[show]--;
 
             if (group[maxFrequency].Count == 0)
-            {
-                // Find the next frequency level that has elements
-                while (maxFrequency > 0 && (!group.ContainsKey(maxFrequency) || group[maxFrequency].Count == 0))
-                {
-                    maxFrequency--;
-                }
-            }
+                maxFrequency--;
 
             return show;    
         }
