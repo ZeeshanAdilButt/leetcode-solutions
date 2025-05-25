@@ -11,16 +11,11 @@ public class Solution {
         
         int pushes = 0;
 
-        int allused =0;
-
         for (int i = 0; i < 26; i++)
         {
             if (frequencies[i] == 0)
                 break;
-            pushes += (allused + 1) * frequencies[i];
-
-            if ((i + 1) % 8 == 0)
-                allused++;
+            pushes += (i / 8 + 1) * frequencies[i];
         }
 
         return pushes;
